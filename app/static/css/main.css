@@ -11,40 +11,40 @@
 
 /* Global Styles */
 :root {
-    /* Primary Brand Colors */
-    --primary-color: #1c2e5d !important;
-    --primary-darker: #152348 !important;
-    --primary-lighter: #2a3f78 !important;
+    /* Primary Brand Colors - Light Theme Blue Accent */
+    --primary-color: #0d6efd !important; /* Bootstrap Blue */
+    --primary-darker: #0b5ed7 !important;
+    --primary-lighter: #3f91ff !important;
     
-    /* Secondary Brand Colors - Using accent color */
-    --secondary-color: #e1c582 !important;
-    --secondary-darker: #d4b46b !important;
-    --secondary-lighter: #eed599 !important;
+    /* Secondary Brand Colors - Keeping Gold Accent */
+    --secondary-color: #ffc107 !important; /* Bootstrap Yellow/Gold */
+    --secondary-darker: #d39e00 !important;
+    --secondary-lighter: #ffca2c !important;
     
-    /* Semantic Colors */
-    --success-color: #3dd16f !important;
-    --success-lighter: #183e24 !important;
-    --danger-color: #ff5757 !important;
-    --danger-lighter: #3d1919 !important;
-    --warning-color: #ffb74d !important;
-    --warning-lighter: #3d2e19 !important;
-    --info-color: #64b5f6 !important;
-    --info-lighter: #193e5c !important;
+    /* Semantic Colors - Adjusted for Light Background */
+    --success-color: #198754 !important; /* Bootstrap Green */
+    --success-lighter: #d1e7dd !important;
+    --danger-color: #dc3545 !important; /* Bootstrap Red */
+    --danger-lighter: #f8d7da !important;
+    --warning-color: #ffc107 !important; /* Bootstrap Yellow */
+    --warning-lighter: #fff3cd !important;
+    --info-color: #0dcaf0 !important; /* Bootstrap Cyan */
+    --info-lighter: #cff4fc !important;
     
-    /* Neutral Colors - Dark theme */
-    --text-primary: #ffffff !important;
-    --text-secondary: #e1e1e1 !important;
-    --text-tertiary: #cccccc !important;
-    --background-primary: #172444 !important;
-    --background-secondary: #1c2e5d !important;
-    --background-tertiary: #223770 !important;
-    --border-color: #2a3f78 !important;
-    --border-color-dark: #344b8a !important;
+    /* Neutral Colors - Light Theme */
+    --text-primary: #212529 !important; /* Dark Gray */
+    --text-secondary: #6c757d !important; /* Medium Gray */
+    --text-tertiary: #adb5bd !important; /* Light Gray */
+    --background-primary: #ffffff !important; /* White */
+    --background-secondary: #f8f9fa !important; /* Off-White */
+    --background-tertiary: #e9ecef !important; /* Lighter Gray */
+    --border-color: #dee2e6 !important; /* Gray Border */
+    --border-color-dark: #ced4da !important; /* Darker Gray Border */
     
-    /* Elevation & Shadows */
-    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3) !important;
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3) !important;
-    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.5), 0 4px 6px rgba(0, 0, 0, 0.4) !important;
+    /* Elevation & Shadows - Softened for Light Theme */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07), 0 1px 3px rgba(0, 0, 0, 0.06) !important;
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.08), 0 4px 6px rgba(0, 0, 0, 0.07) !important;
     
     /* Spacing Scale */
     --space-1: 0.25rem;
@@ -82,7 +82,7 @@ html {
 body {
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     color: var(--text-primary);
-    background-color: var(--background-secondary);
+    background-color: var(--background-secondary); /* Use secondary for overall page background */
     line-height: 1.5;
     margin: 0;
     padding: 0;
@@ -110,13 +110,13 @@ img {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--space-4);
-    background-color: var(--background-primary);
+    background-color: var(--background-primary); /* Main content areas use primary (white) */
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-sm);
     overflow: hidden;
 }
 
-/* Alert Styles */
+/* Alert Styles - Updated for Light Theme */
 .alert {
     padding: var(--space-4);
     margin-bottom: var(--space-4);
@@ -125,30 +125,31 @@ img {
     align-items: center;
     gap: var(--space-2);
     font-weight: 500;
+    border: 1px solid transparent; /* Base border */
 }
 
 .alert-success {
     background-color: var(--success-lighter);
     color: var(--success-color);
-    border: 1px solid var(--success-lighter);
+    border-color: var(--success-lighter);
 }
 
 .alert-danger {
     background-color: var(--danger-lighter);
     color: var(--danger-color);
-    border: 1px solid var(--danger-lighter);
+    border-color: var(--danger-lighter);
 }
 
 .alert-warning {
     background-color: var(--warning-lighter);
-    color: var(--warning-color);
-    border: 1px solid var(--warning-lighter);
+    color: #664d03; /* Darker text for yellow background */
+    border-color: var(--warning-lighter);
 }
 
 .alert-info {
     background-color: var(--info-lighter);
-    color: var(--info-color);
-    border: 1px solid var(--info-lighter);
+    color: #055160; /* Darker text for cyan background */
+    border-color: var(--info-lighter);
 }
 
 /* Responsive table containers */
@@ -168,9 +169,10 @@ img {
 .table th, 
 .table td {
     color: var(--text-primary) !important;
+    border-color: var(--border-color) !important; /* Use light theme border */
 }
 
-/* Override Bootstrap table styles for dark mode */
+/* Override Bootstrap table styles for light mode */
 .card .table,
 .card .table thead,
 .card .table tbody,
@@ -188,18 +190,24 @@ img {
     background-color: transparent !important;
 }
 
+/* Style table header specifically */
+.card .table thead th {
+    background-color: var(--background-tertiary) !important; /* Light gray header */
+    font-weight: 600;
+}
+
 .card .table-primary,
 .card .table-primary > th,
 .card .table-primary > td {
-    background-color: var(--primary-darker) !important;
-    color: var(--text-primary) !important;
+    background-color: var(--primary-lighter) !important; /* Use lighter blue */
+    color: var(--primary-darker) !important; /* Darker blue text */
 }
 
 .card .table-secondary,
 .card .table-secondary > th,
 .card .table-secondary > td {
-    background-color: var(--background-tertiary) !important;
-    color: var(--text-primary) !important;
+    background-color: var(--secondary-lighter) !important; /* Use lighter gold */
+    color: var(--secondary-darker) !important; /* Darker gold text */
 }
 
 .card .table-success,
@@ -213,7 +221,7 @@ img {
 .card .table-warning > th,
 .card .table-warning > td {
     background-color: var(--warning-lighter) !important;
-    color: var(--warning-color) !important;
+    color: #664d03 !important; /* Darker text for yellow background */
 }
 
 .card .table-danger,
@@ -223,164 +231,150 @@ img {
     color: var(--danger-color) !important;
 }
 
-/* Fix badge colors in tables */
+/* Table Badges */
 .table .badge {
-    display: inline-block;
-    padding: 0.25em 0.5em;
-    font-size: 0.75em;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: baseline;
-    border-radius: 0.25rem;
+    color: #fff !important; /* Make badge text white by default for contrast */
+    padding: var(--space-1) var(--space-2);
 }
 
-/* Badge color overrides for dark mode/visibility */
 .table .badge.bg-success {
     background-color: var(--success-color) !important;
-    color: #fff !important;
 }
 
 .table .badge.bg-warning {
     background-color: var(--warning-color) !important;
-    color: #212529 !important; /* Dark text for light background */
+    color: var(--text-primary) !important; /* Dark text on yellow */
 }
 
 .table .badge.bg-danger {
     background-color: var(--danger-color) !important;
-    color: #fff !important;
 }
 
 .table .badge.bg-info {
     background-color: var(--info-color) !important;
-    color: #212529 !important; /* Dark text for light background */
+    color: var(--text-primary) !important; /* Dark text on cyan */
 }
 
 .table .badge.bg-primary {
     background-color: var(--primary-color) !important;
-    color: #fff !important;
 }
 
 .table .badge.bg-secondary {
     background-color: var(--secondary-color) !important;
-    color: #212529 !important; /* Dark text for light background */
+    color: var(--text-primary) !important; /* Dark text on gold */
 }
 
-/* Standard badge styling for all pages */
+/* General Badges (outside tables) */
 .badge {
-    display: inline-block;
-    padding: 0.25em 0.5em;
+    padding: 0.35em 0.65em;
     font-size: 0.75em;
     font-weight: 700;
     line-height: 1;
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    border-radius: 0.25rem;
+    border-radius: var(--radius-md);
+    color: #fff; /* Default white text */
 }
 
-/* Global badge styles - these apply outside tables too */
 .badge.bg-success {
     background-color: var(--success-color) !important;
-    color: #fff !important;
 }
 
 .badge.bg-warning {
     background-color: var(--warning-color) !important;
-    color: #212529 !important;
+    color: var(--text-primary) !important; /* Dark text on yellow */
 }
 
 .badge.bg-danger {
     background-color: var(--danger-color) !important;
-    color: #fff !important;
 }
 
 .badge.bg-info {
     background-color: var(--info-color) !important;
-    color: #212529 !important;
+    color: var(--text-primary) !important; /* Dark text on cyan */
 }
 
 .badge.bg-primary {
     background-color: var(--primary-color) !important;
-    color: #fff !important;
 }
 
 .badge.bg-secondary {
     background-color: var(--secondary-color) !important;
-    color: #212529 !important;
+    color: var(--text-primary) !important; /* Dark text on gold */
 }
 
-/* Force color for all inputs and form fields */
+/* Ensure Form Elements are visible */
 input, select, textarea, .form-control {
     color: var(--text-primary) !important;
-    background-color: var(--background-tertiary) !important;
-    border-color: var(--border-color) !important;
+    background-color: var(--background-primary) !important; /* White background for inputs */
+    border: 1px solid var(--border-color) !important;
 }
 
-/* Force text color on all text elements */
+/* Basic text elements */
 p, span, label, a, div, li {
-    color: var(--text-primary) !important;
+    color: var(--text-primary);
 }
 
-/* Force dark text for all headings */
 h1, h2, h3, h4, h5, h6 {
-    color: var(--text-primary) !important;
+    color: var(--text-primary);
 }
 
-/* Print styles - override dark theme for printing */
+/* Print Styles - Invert back for printing if needed, or keep light */
 @media print {
     :root {
-        /* Primary Brand Colors */
-        --primary-color: #4169E1 !important;
-        --primary-darker: #3154b4 !important;
-        --primary-lighter: #6889e8 !important;
-        
-        /* Secondary Brand Colors */
-        --secondary-color: #718096 !important;
-        --secondary-darker: #4a5568 !important;
-        --secondary-lighter: #a0aec0 !important;
-        
-        /* Semantic Colors */
-        --success-color: #38A169 !important;
-        --success-lighter: #C6F6D5 !important;
-        --danger-color: #E53E3E !important;
-        --danger-lighter: #FED7D7 !important;
-        --warning-color: #DD6B20 !important;
-        --warning-lighter: #FEEBC8 !important;
-        --info-color: #3182CE !important;
-        --info-lighter: #BEE3F8 !important;
-        
-        /* Neutral Colors */
-        --text-primary: #1A202C !important;
-        --text-secondary: #4A5568 !important;
-        --text-tertiary: #718096 !important;
-        --background-primary: #FFFFFF !important;
-        --background-secondary: #F7FAFC !important;
-        --background-tertiary: #EDF2F7 !important;
-        --border-color: #E2E8F0 !important;
-        --border-color-dark: #CBD5E0 !important;
+        /* Keep light theme for print or define specific print colors */
+        --primary-color: #0d6efd !important;
+        --primary-darker: #0b5ed7 !important;
+        --primary-lighter: #3f91ff !important;
+        --secondary-color: #ffc107 !important;
+        --secondary-darker: #d39e00 !important;
+        --secondary-lighter: #ffca2c !important;
+        --success-color: #198754 !important;
+        --success-lighter: #d1e7dd !important;
+        --danger-color: #dc3545 !important;
+        --danger-lighter: #f8d7da !important;
+        --warning-color: #ffc107 !important;
+        --warning-lighter: #fff3cd !important;
+        --info-color: #0dcaf0 !important;
+        --info-lighter: #cff4fc !important;
+        --text-primary: #000000 !important; /* Black text for print */
+        --text-secondary: #444444 !important;
+        --text-tertiary: #777777 !important;
+        --background-primary: #ffffff !important; /* White background for print */
+        --background-secondary: #ffffff !important;
+        --background-tertiary: #eeeeee !important;
+        --border-color: #aaaaaa !important;
+        --border-color-dark: #888888 !important;
+        --shadow-sm: none !important; /* Remove shadows for print */
+        --shadow-md: none !important;
+        --shadow-lg: none !important;
     }
-    
+
     body {
-        background-color: white !important;
-        color: black !important;
+        background-color: var(--background-primary) !important; /* Ensure white background for print */
+        color: var(--text-primary) !important;
     }
-    
+
     .main-nav, 
-    .app-footer,
-    .sticky-nav {
-        display: none !important;
+    .app-footer, 
+    .no-print {
+        display: none !important; /* Hide nav, footer, and specific non-print elements */
     }
     
-    /* Ensure print text colors */
+    .print-form {
+        box-shadow: none !important;
+        border: none !important;
+    }
+
     p, span, label, a, div, li, th, td, input, select, textarea, .form-control {
-        color: var(--text-primary) !important;
+        color: var(--text-primary) !important; /* Ensure all text is black */
     }
-    
+
     .table, .table th, .table td {
-        color: var(--text-primary) !important;
+        border-color: var(--border-color-dark) !important; /* Use darker border for print clarity */
     }
+    /* Add any other print-specific overrides */
 }
 
 /* Form responsiveness */
@@ -472,7 +466,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* Force dark mode for all containers */
-.container, 
+.container,
 .main-content,
 .table-container,
 .form-container,

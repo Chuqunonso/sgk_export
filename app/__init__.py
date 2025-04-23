@@ -2,12 +2,14 @@ print("Starting package load: app/__init__.py")
 import os
 import sys
 import logging
-from flask import Flask, render_template, flash
+from flask import Flask, render_template, flash, session, redirect, url_for, request
 from .extensions import db, login_manager, migrate, csrf
 from .models.user import User
 from .utils.logging_config import setup_logging
 from .config import config
 from uuid import UUID
+from datetime import datetime, timedelta
+from flask_login import current_user, logout_user
 
 logger = logging.getLogger(__name__)
 
@@ -103,6 +105,57 @@ def create_app(config_name=None):
             # This will cause Flask-Login to treat the user as not authenticated
             return None
     
+    # --- Inactivity Check ---    
+    @app.before_request
+    def before_request_handler():
+        # Make session permanent so it uses PERMANENT_SESSION_LIFETIME
+        session.permanent = True 
+        
+        # Check only if user is authenticated and last_activity is set
+        if current_user.is_authenticated and 'last_activity' in session:
+            now_utc = datetime.utcnow() # Use naive UTC time
+            last_active_time = session['last_activity']
+            
+            # Ensure last_active_time is a datetime object 
+            if not isinstance(last_active_time, datetime):
+                 # If it's somehow not a datetime, log out the user for safety
+                logger.warning(f"Session 'last_activity' was not a datetime object for user {current_user.id}. Logging out.")
+                logout_user()
+                flash('Session error. Please log in again.', 'warning')
+                # Redirect to login immediately if session data is corrupted
+                # Check if the current request endpoint is already the login page to avoid redirect loop
+                if request.endpoint and request.endpoint != 'auth.login':
+                     return redirect(url_for('auth.login'))
+                return # Prevent further processing or redirect loop
+            
+            # Convert last_active_time to naive UTC if it's offset-aware
+            if last_active_time.tzinfo is not None:
+                logger.debug(f"Converting offset-aware last_activity ({last_active_time}) to naive UTC.")
+                last_active_time = last_active_time.replace(tzinfo=None)
+            
+            # Now both should be naive UTC datetimes
+            delta = now_utc - last_active_time
+            inactive_duration = timedelta(minutes=2) # Define the 2-minute inactivity limit
+            
+            # Check if inactive duration is exceeded
+            if delta > inactive_duration:
+                logger.info(f"User {current_user.id} timed out due to inactivity.")
+                logout_user() # Log the user out
+                flash('You have been logged out due to inactivity.', 'info')
+                # Redirect to login page after logging out due to inactivity
+                # Check endpoint to avoid redirect loop if already on login page implicitly
+                if request.endpoint and request.endpoint != 'auth.login':
+                    return redirect(url_for('auth.login'))
+                return # Stop processing the request if redirected
+            else:
+                # If user is active, update the last_activity time with naive UTC
+                session['last_activity'] = now_utc 
+        # If user is not authenticated or it's their first request in the session,
+        # 'last_activity' might not be set yet, which is fine.
+        elif current_user.is_authenticated and 'last_activity' not in session:
+            # If authenticated but no timestamp (e.g., session migrated?), set it now.
+             session['last_activity'] = datetime.utcnow() # Store naive UTC
+
     logger.debug("Application initialization completed")
     logger.debug(f"Final app object type: {type(app)}")
     logger.debug(f"Final app object attributes: {dir(app)}")

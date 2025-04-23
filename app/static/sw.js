@@ -24,7 +24,7 @@ const APP_SHELL = [
   '/static/js/modules/offline-navigation.js',
   '/static/js/modules/api-service.js',
   '/static/manifest.json',
-  '/static/images/SGKlogo.png',
+  '/static/images/BHL-logo.png',
   '/static/images/icons/icon-72x72.png',
   '/static/images/icons/icon-96x96.png',
   '/static/images/icons/icon-128x128.png',

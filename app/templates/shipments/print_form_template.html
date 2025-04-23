@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Print Form Template - SGK Global Shipping{% endblock %}
+{% block title %}Print Form Template - Bekky's Hassle-Free Logistics{% endblock %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/components/print.css') }}">
@@ -58,9 +58,11 @@
 </div>
 
 <div class="print-form">
-    <div class="company-header">
-        <img src="{{ url_for('static', filename='images/SGKlogo.png') }}" alt="SGK Global Shipping" class="company-logo">
-        <h1>Export Documentation Form</h1>
+    <div class="header">
+        <div class="company-info">
+            <img src="{{ url_for('static', filename='images/BHL-logo.png') }}" alt="Bekky's Hassle-Free Logistics" class="company-logo">
+            <h1>{{ form_title|default('Export Documentation') }}</h1>
+        </div>
         <p>Waybill #<span class="manual-input"></span></p>
         <p>Date: <span class="manual-input"></span></p>
     </div>
@@ -146,7 +148,7 @@
                 <tr>
                     <th width="40%">Description</th>
                     <th width="20%">Quantity</th>
-                    <th width="20%">Value ($)</th>
+                    <th width="20%">Value (₦)</th>
                     <th width="20%">Weight (kg)</th>
                 </tr>
             </thead>

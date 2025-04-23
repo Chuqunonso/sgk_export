@@ -186,9 +186,9 @@ function initializePricingCalculations() {
                 const totalElement = document.getElementById('total');
 
                 if (subtotalElement && vatElement && totalElement) {
-                    subtotalElement.textContent = `$${subtotal.toFixed(2)}`;
-                    vatElement.textContent = `$${vat.toFixed(2)}`;
-                    totalElement.textContent = `$${total.toFixed(2)}`;
+                    subtotalElement.textContent = `₦${subtotal.toFixed(2)}`;
+                    vatElement.textContent = `₦${vat.toFixed(2)}`;
+                    totalElement.textContent = `₦${total.toFixed(2)}`;
                     console.log(`Updated totals - Subtotal: ${subtotal}, VAT: ${vat}, Total: ${total}`);
                 }
             } catch (error) {

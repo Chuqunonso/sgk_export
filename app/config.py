@@ -1,4 +1,5 @@
 import os
+from datetime import timedelta  # Import timedelta
 
 class Config:
     """Base configuration."""
@@ -8,6 +9,9 @@ class Config:
     UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
     TEMPLATES_AUTO_RELOAD = True
     
+    # Set permanent session lifetime (e.g., 10 minutes as a buffer)
+    PERMANENT_SESSION_LIFETIME = timedelta(minutes=10)
+
     # NAS storage configuration
     USE_NAS_STORAGE = os.environ.get('USE_NAS_STORAGE', 'False').lower() == 'true'
     NAS_UPLOAD_FOLDER = os.environ.get('NAS_UPLOAD_FOLDER', '\\\\NAS_SERVER\\sgk_export_share\\uploads')

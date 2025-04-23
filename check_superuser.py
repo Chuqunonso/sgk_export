@@ -1,3 +1,15 @@
+import os
+import sys
+# Add this block to load .env before other imports
+from dotenv import load_dotenv
+load_dotenv() 
+# --- End of added block ---
+
+# Ensure the project root directory is in the Python path
+project_root = os.path.dirname(os.path.abspath(__file__))
+if project_root not in sys.path:
+    sys.path.append(project_root)
+
 from app import create_app, db
 from app.models.user import User
 

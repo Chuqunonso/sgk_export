@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Export Request Preview - SGK Global Shipping{% endblock %}
+{% block title %}Export Request Preview - Bekky's Hassle-Free Logistics{% endblock %}
 
 {% block extra_head %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/components/preview.css') }}">
@@ -99,7 +99,7 @@
     <div class="document-header">
         <div class="company-header">
             <div class="company-info-section">
-            <img src="{{ url_for('static', filename='images/SGKlogo.png') }}" alt="SGK Global Shipping" class="company-logo">
+            <img src="{{ url_for('static', filename='images/BHL-logo.png') }}" alt="Bekky's Hassle-Free Logistics" class="company-logo">
                 <div class="company-info">
                     <h1>Export Documentation</h1>
                     <div class="document-meta">
@@ -242,7 +242,7 @@
                         <tr>
                             <td>{{ item.description }}</td>
                             <td>{{ item.quantity }}</td>
-                            <td>${{ "%.2f"|format(item.value) }}</td>
+                            <td>₦{{ "%.2f"|format(item.value) }}</td>
                             <td>{{ "%.1f"|format(item.weight) }}</td>
                             <td class="no-print">
                                 {% if item.image_file_id %}
@@ -269,41 +269,41 @@
                 <div class="pricing-details">
                     <div class="info-row">
                         <span class="label">Freight Pricing:</span>
-                        <span class="value">${{ "%.2f"|format(shipment.freight_pricing) }}</span>
+                        <span class="value">₦{{ "%.2f"|format(shipment.freight_pricing) }}</span>
                     </div>
                     <div class="info-row">
                         <span class="label">Additional Charges:</span>
-                        <span class="value">${{ "%.2f"|format(shipment.additional_charges) }}</span>
+                        <span class="value">₦{{ "%.2f"|format(shipment.additional_charges) }}</span>
                     </div>
                     <div class="info-row">
                         <span class="label">Pick Up Charge:</span>
-                        <span class="value">${{ "%.2f"|format(shipment.pickup_charge) }}</span>
+                        <span class="value">₦{{ "%.2f"|format(shipment.pickup_charge) }}</span>
                 </div>
                 <div class="info-row">
                         <span class="label">Handling Fees:</span>
-                        <span class="value">${{ "%.2f"|format(shipment.handling_fees) }}</span>
+                        <span class="value">₦{{ "%.2f"|format(shipment.handling_fees) }}</span>
                 </div>
                 <div class="info-row">
                         <span class="label">Crating:</span>
-                        <span class="value">${{ "%.2f"|format(shipment.crating) }}</span>
+                        <span class="value">₦{{ "%.2f"|format(shipment.crating) }}</span>
                 </div>
                 <div class="info-row">
                         <span class="label">Insurance Charge:</span>
-                        <span class="value">${{ "%.2f"|format(shipment.insurance_charge) }}</span>
+                        <span class="value">₦{{ "%.2f"|format(shipment.insurance_charge) }}</span>
                     </div>
                 </div>
             <div class="total-section">
                 <div class="total-row">
                         <span>Subtotal</span>
-                        <span>${{ "%.2f"|format(subtotal) }}</span>
+                        <span>₦{{ "%.2f"|format(subtotal) }}</span>
                 </div>
                 <div class="total-row">
                         <span>VAT (7%)</span>
-                        <span>${{ "%.2f"|format(vat) }}</span>
+                        <span>₦{{ "%.2f"|format(vat) }}</span>
                 </div>
                 <div class="total-row final">
                         <span>Total Amount</span>
-                        <span>${{ "%.2f"|format(total) }}</span>
+                        <span>₦{{ "%.2f"|format(total) }}</span>
                     </div>
                 </div>
             </div>

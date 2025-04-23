@@ -9,7 +9,7 @@ if ! command -v convert &> /dev/null; then
 fi
 
 # Set source logo path
-SOURCE_LOGO="app/static/images/SGKlogo.png"
+SOURCE_LOGO="app/static/images/BHL-logo.png"
 
 # Check if source logo exists
 if [ ! -f "$SOURCE_LOGO" ]; then

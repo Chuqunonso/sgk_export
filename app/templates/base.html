@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
-    <meta name="description" content="SGK Global Shipping Export Documentation">
-    <meta name="theme-color" content="#4169E1">
+    <meta name="description" content="Bekky's Hassle-Free Logistics Export Documentation">
+    <meta name="theme-color" content="#007bff">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="format-detection" content="telephone=no">
-    <title>{% block title %}SGK Global Shipping{% endblock %}</title>
+    <title>{% block title %}Bekky's Hassle-Free Logistics{% endblock %}</title>
     
     <!-- PWA Meta Tags -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -17,14 +17,14 @@
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     
     <!-- PWA Icons -->
-    <link rel="icon" href="{{ url_for('static', filename='images/icons/icon-72x72.png') }}" sizes="72x72">
-    <link rel="icon" href="{{ url_for('static', filename='images/icons/icon-96x96.png') }}" sizes="96x96">
-    <link rel="icon" href="{{ url_for('static', filename='images/icons/icon-128x128.png') }}" sizes="128x128">
-    <link rel="icon" href="{{ url_for('static', filename='images/icons/icon-144x144.png') }}" sizes="144x144">
-    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/icons/icon-152x152.png') }}" sizes="152x152">
-    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/icons/icon-192x192.png') }}" sizes="192x192">
-    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/icons/icon-384x384.png') }}" sizes="384x384">
-    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/icons/icon-512x512.png') }}" sizes="512x512">
+    <link rel="icon" href="{{ url_for('static', filename='images/BHL-logo.png') }}" sizes="72x72">
+    <link rel="icon" href="{{ url_for('static', filename='images/BHL-logo.png') }}" sizes="96x96">
+    <link rel="icon" href="{{ url_for('static', filename='images/BHL-logo.png') }}" sizes="128x128">
+    <link rel="icon" href="{{ url_for('static', filename='images/BHL-logo.png') }}" sizes="144x144">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/BHL-logo.png') }}" sizes="152x152">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/BHL-logo.png') }}" sizes="192x192">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/BHL-logo.png') }}" sizes="384x384">
+    <link rel="apple-touch-icon" href="{{ url_for('static', filename='images/BHL-logo.png') }}" sizes="512x512">
     <link rel="apple-touch-startup-image" href="{{ url_for('static', filename='images/icons/splash-640x1136.png') }}" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
     <link rel="apple-touch-startup-image" href="{{ url_for('static', filename='images/icons/splash-750x1334.png') }}" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)">
     <link rel="apple-touch-startup-image" href="{{ url_for('static', filename='images/icons/splash-1242x2208.png') }}" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)">
@@ -72,8 +72,8 @@
     <nav class="sticky-nav" role="navigation" aria-label="Main navigation">
         <div class="main-nav">
             <div class="nav-brand">
-                <img src="{{ url_for('static', filename='images/SGKlogo.png') }}" alt="SGK Global Shipping Logo" class="nav-logo" width="40" height="40">
-                <span class="brand-text">SGK Global Shipping</span>
+                <img src="{{ url_for('static', filename='images/BHL-logo.png') }}" alt="Bekky's Hassle-Free Logistics Logo" class="nav-logo" width="40" height="40">
+                <span class="brand-text">Bekky's Hassle-Free Logistics</span>
             </div>
             {% if current_user.is_authenticated %}
             <button class="mobile-menu-toggle" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="nav-links">
@@ -233,11 +233,11 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-company">
-                    <img src="{{ url_for('static', filename='images/SGKlogo.png') }}" alt="SGK Global Shipping Logo" class="footer-logo" width="30" height="30">
-                    <p>© 2023 SGK Global Shipping</p>
+                    <img src="{{ url_for('static', filename='images/BHL-logo.png') }}" alt="Bekky's Hassle-Free Logistics Logo" class="footer-logo" width="30" height="30">
+                    <p>© {% block current_year %}{{ current_year }}{% endblock %} Bekky's Hassle-Free Logistics</p>
                 </div>
                 <div class="footer-links">
-                    <a href="{{ url_for('main.terms') }}">Terms & Conditions</a>
+                    <a href="{{ url_for('main.terms') }}">Terms and Conditions</a>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#privacyPolicyModal">Privacy Policy</a>
                     <a href="#" data-bs-toggle="modal" data-bs-target="#contactSupportModal">Support</a>
                 </div>

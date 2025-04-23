@@ -1,8 +1,9 @@
-from flask import Blueprint, render_template, request, redirect, url_for, flash
+from flask import Blueprint, render_template, request, redirect, url_for, flash, session
 from flask_login import login_user, logout_user, login_required, current_user
 from ..models.user import User
 from ..extensions import db
 import logging
+from datetime import datetime
 
 bp = Blueprint('auth', __name__)
 logger = logging.getLogger(__name__)
@@ -16,6 +17,8 @@ def login():
         user = User.query.filter_by(username=username).first()
         if user and user.check_password(password):
             login_user(user)
+            session.permanent = True
+            session['last_activity'] = datetime.utcnow()
             return redirect(url_for('main.dashboard'))
         else:
             flash('Invalid username or password')
