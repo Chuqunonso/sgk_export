@@ -13,7 +13,7 @@ This document describes the helper scripts available for managing and debugging 
 
 ## Overview
 
-Helper scripts are standalone Python files that perform specific administrative or debugging tasks outside the main application flow. They leverage the application's models and database but run as separate processes, making them ideal for:
+Helper scripts are standalone Python files that performs specific administrative or debugging tasks outside the main application flow. They leverage the application's models and database but run as separate processes, making them ideal for:
 
 - Performing one-off administrative tasks
 - Debugging application state
