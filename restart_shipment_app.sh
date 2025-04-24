@@ -1,11 +1,39 @@
 #!/bin/bash
 
-# Script to restart the sgkexport launchd service
+# Script to restart the sgkexport launchd service and ensure PostgreSQL is running
 
 # Get the directory where the script is located
 SCRIPT_DIR=$(dirname "$0")
 PLIST_PATH="$HOME/Library/LaunchAgents/com.stephanieaguh.sgkexport.plist"
 LABEL="com.stephanieaguh.sgkexport"
+PG_SERVICE="postgresql@14"
+
+# --- PostgreSQL Check ---
+echo "Checking status of PostgreSQL service ($PG_SERVICE)..."
+if brew services list | grep "$PG_SERVICE" | grep -q started; then
+    echo "PostgreSQL service is running."
+else
+    echo "PostgreSQL service is not running correctly. Attempting restart..."
+    brew services restart "$PG_SERVICE"
+    if [ $? -ne 0 ]; then
+        echo "Error: Failed to execute PostgreSQL restart command via Homebrew."
+        # Optional: Add more specific troubleshooting hints here if needed
+        echo "Please check PostgreSQL manually (e.g., brew services list, logs)."
+        exit 1
+    fi
+    sleep 2 # Give the service a moment to stabilize after restart command
+    echo "Re-checking status of PostgreSQL service ($PG_SERVICE)..."
+    if brew services list | grep "$PG_SERVICE" | grep -q started; then
+        echo "PostgreSQL service started successfully."
+    else
+        # If it still fails, something is wrong with PostgreSQL itself
+        echo "Error: Failed to start PostgreSQL service after restart attempt."
+        echo "Please check PostgreSQL logs and status manually."
+        exit 1
+    fi
+fi
+# --- End PostgreSQL Check ---
+
 
 echo "Attempting to restart the $LABEL service..."
 

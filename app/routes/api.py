@@ -2,12 +2,13 @@ from flask import Blueprint, jsonify, request, current_app
 from flask_login import login_required, current_user
 from ..models.shipment import Shipment, ShipmentItem
 from ..utils.helpers import calculate_subtotal, calculate_vat
-from ..extensions import db
+from ..extensions import db, csrf
 from sqlalchemy import func, case, and_
 import logging
 from datetime import datetime, timedelta
 from functools import wraps
 import jwt
+from flask import session
 
 logger = logging.getLogger(__name__)
 
@@ -597,4 +598,26 @@ def get_dashboard_data():
         return jsonify({
             'error': 'Internal server error',
             'details': str(e)
-        }), 500 
+        }), 500
+
+# New endpoint for activity ping
+@bp.route('/ping', methods=['POST'])
+@login_required
+def activity_ping():
+    """Update the session's last activity timestamp."""
+    try:
+        session['last_activity'] = datetime.utcnow()
+        # Optionally, you could log this
+        # logger.debug(f"Activity ping received for user {current_user.id}")
+        return jsonify(success=True)
+    except Exception as e:
+        # Log error if session update fails for some reason
+        logger.error(f"Error updating session activity for user {current_user.id}: {str(e)}", exc_info=True)
+        # Still return success ideally, as the main goal is client-side reset
+        # but report the server error
+        return jsonify(success=False, error="Server error updating session"), 500
+
+if __name__ == '__main__':
+    # This block is typically not run when using a WSGI server like Gunicorn
+    # but can be useful for direct script execution testing (if needed)
+    pass 

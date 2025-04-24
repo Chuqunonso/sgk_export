@@ -85,16 +85,17 @@ LOGGING_CONFIG = {
             'level': 'DEBUG',
             'propagate': True
         },
-        'gunicorn.access': {
-            'handlers': ['access_file'],
-            'level': 'INFO',
-            'propagate': False
-        },
-        'gunicorn.error': {
-            'handlers': ['error_file'],
-            'level': 'ERROR',
-            'propagate': False
-        }
+        # REMOVE GUNICORN LOGGER CONFIGS
+        # 'gunicorn.access': {
+        #     'handlers': ['access_file'],
+        #     'level': 'INFO',
+        #     'propagate': False
+        # },
+        # 'gunicorn.error': {
+        #     'handlers': ['error_file'],
+        #     'level': 'ERROR',
+        #     'propagate': False
+        # }
     }
 }
 

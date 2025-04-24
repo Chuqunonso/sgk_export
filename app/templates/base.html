@@ -342,5 +342,91 @@
             display: none !important;
         }
     </style>
+
+    <!-- Activity Ping Script -->
+    {% if current_user.is_authenticated %}
+    <script>
+        (function() {
+            const PING_INTERVAL = 60000; // Ping every 60 seconds if activity detected
+            let lastPingSent = 0;
+            let activityTimer = null;
+
+            function getCsrfToken() {
+                const tokenMeta = document.querySelector('meta[name="csrf-token"]');
+                return tokenMeta ? tokenMeta.getAttribute('content') : null;
+            }
+
+            function pingServerActivity() {
+                const now = Date.now();
+                // Ensure we don't ping too frequently
+                if (now - lastPingSent < PING_INTERVAL) {
+                    console.log('Activity ping throttled.');
+                    return;
+                }
+
+                const csrfToken = getCsrfToken();
+                if (!csrfToken) {
+                    console.error('CSRF token not found for activity ping.');
+                    return;
+                }
+
+                console.log('Pinging server activity...');
+                lastPingSent = now;
+
+                fetch('{{ url_for("api.activity_ping") }}', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': csrfToken
+                    },
+                    // No body needed, the request itself signifies activity
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        console.error('Server activity ping failed:', response.statusText);
+                        // Optional: Handle server error (e.g., notify user after repeated failures)
+                    } else {
+                        console.log('Server activity ping successful.');
+                    }
+                    return response.json(); // Consume response body
+                })
+                .catch(error => {
+                    console.error('Error during server activity ping:', error);
+                });
+            }
+
+            // Throttle function: ensures the function is called at most once per interval
+            function throttle(func, limit) {
+                let inThrottle;
+                return function() {
+                    const args = arguments;
+                    const context = this;
+                    if (!inThrottle) {
+                        func.apply(context, args);
+                        inThrottle = true;
+                        setTimeout(() => inThrottle = false, limit);
+                    }
+                }
+            }
+
+            // Throttled version of the ping function
+            const throttledPing = throttle(pingServerActivity, PING_INTERVAL);
+
+            function resetActivityTimer() {
+                 // When activity is detected, call the throttled ping function
+                throttledPing();
+            }
+
+            // Listen for user activity
+            ['mousemove', 'keydown', 'scroll', 'touchstart'].forEach(function(eventName) {
+                document.addEventListener(eventName, resetActivityTimer, { passive: true });
+            });
+
+            console.log('Client-side activity tracking initialized.');
+
+        })();
+    </script>
+    {% endif %}
+    <!-- End Activity Ping Script -->
 </body>
 </html> 

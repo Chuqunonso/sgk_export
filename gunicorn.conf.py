@@ -18,51 +18,51 @@ errorlog = "logs/error.log"
 loglevel = os.getenv('GUNICORN_LOG_LEVEL', 'info')
 
 # Log rotation
-logconfig_dict = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'class': 'logging.StreamHandler',
-            'formatter': 'generic',
-            'stream': 'ext://sys.stdout'
-        },
-        'error_file': {
-            'class': 'logging.handlers.RotatingFileHandler',
-            'formatter': 'generic',
-            'filename': 'logs/error.log',
-            'maxBytes': 10485760,  # 10MB
-            'backupCount': 5
-        },
-        'access_file': {
-            'class': 'logging.handlers.RotatingFileHandler',
-            'formatter': 'access',
-            'filename': 'logs/access.log',
-            'maxBytes': 10485760,  # 10MB
-            'backupCount': 5
-        }
-    },
-    'formatters': {
-        'generic': {
-            'format': '%(asctime)s [%(process)d] [%(levelname)s] %(message)s',
-            'datefmt': '%Y-%m-%d %H:%M:%S',
-            'class': 'logging.Formatter'
-        },
-        'access': {
-            'format': '%(asctime)s [%(process)d] [ACCESS] %(message)s',
-            'datefmt': '%Y-%m-%d %H:%M:%S',
-            'class': 'logging.Formatter'
-        }
-    },
-    'loggers': {
-        'gunicorn.error': {
-            'level': 'INFO',
-            'handlers': ['console', 'error_file'],
-            'propagate': False,
-            'qualname': 'gunicorn.error'
-        }
-    }
-}
+# logconfig_dict = {  # REMOVE THIS ENTIRE DICTIONARY
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#     'handlers': {
+#         'console': {
+#             'class': 'logging.StreamHandler',
+#             'formatter': 'generic',
+#             'stream': 'ext://sys.stdout'
+#         },
+#         'error_file': {
+#             'class': 'logging.handlers.RotatingFileHandler',
+#             'formatter': 'generic',
+#             'filename': 'logs/error.log',
+#             'maxBytes': 10485760,  # 10MB
+#             'backupCount': 5
+#         },
+#         'access_file': {
+#             'class': 'logging.handlers.RotatingFileHandler',
+#             'formatter': 'access',
+#             'filename': 'logs/access.log',
+#             'maxBytes': 10485760,  # 10MB
+#             'backupCount': 5
+#         }
+#     },
+#     'formatters': {
+#         'generic': {
+#             'format': '%(asctime)s [%(process)d] [%(levelname)s] %(message)s',
+#             'datefmt': '%Y-%m-%d %H:%M:%S',
+#             'class': 'logging.Formatter'
+#         },
+#         'access': {
+#             'format': '%(asctime)s [%(process)d] [ACCESS] %(message)s',
+#             'datefmt': '%Y-%m-%d %H:%M:%S',
+#             'class': 'logging.Formatter'
+#         }
+#     },
+#     'loggers': {
+#         'gunicorn.error': {
+#             'level': 'INFO',
+#             'handlers': ['console', 'error_file'],
+#             'propagate': False,
+#             'qualname': 'gunicorn.error'
+#         }
+#     }
+# }
 
 # Process naming
 proc_name = 'sgk_export'
