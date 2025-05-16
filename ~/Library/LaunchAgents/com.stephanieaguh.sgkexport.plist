@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.stephanieaguh.sgkexport</string>
+    <key>WorkingDirectory</key>
+    <string>/Users/stephanieaguh/sgkExport/sgk_export</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/stephanieaguh/sgkExport/sgk_export/venv/bin/gunicorn</string>
+        <string>--workers=2</string>
+        <string>--threads=4</string>
+        <string>--timeout=120</string>
+        <string>--max-requests=1000</string>
+        <string>--max-requests-jitter=100</string>
+        <string>--log-file=/Users/stephanieaguh/sgkExport/sgk_export/logs/gunicorn.log</string>
+        <string>--log-level=info</string>
+        <string>--access-logfile=/Users/stephanieaguh/sgkExport/sgk_export/logs/access.log</string>
+        <string>--error-logfile=/Users/stephanieaguh/sgkExport/sgk_export/logs/error.log</string>
+        <string>wsgi:app</string>
+    </array>
+    <key>RunAtLoad</key>
+    <true/>
+    <key>KeepAlive</key>
+    <true/>
+    <key>StandardOutPath</key>
+    <string>/Users/stephanieaguh/sgkexport.out.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/stephanieaguh/sgkexport.err.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+    </dict>
+</dict>
+</plist> 

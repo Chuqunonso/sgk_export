@@ -6,11 +6,15 @@ bind = "0.0.0.0:8000"
 backlog = 2048
 
 # Worker processes - More conservative calculation
-workers = min(multiprocessing.cpu_count() + 1, 4)  # Max 4 workers
+workers = 2  # Fixed number of workers for stability
 worker_class = 'sync'
 worker_connections = 1000
 timeout = 120
 keepalive = 2
+
+# Prevent memory leaks
+max_requests = 1000
+max_requests_jitter = 100
 
 # Logging
 accesslog = "logs/access.log"

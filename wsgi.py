@@ -1,28 +1,35 @@
-print("Starting module load: wsgi.py")
-import logging
+#!/usr/bin/env python3
+import os
 import sys
-from app import create_app
+import logging
 
-# Configure logging
+# Configure logging - reduce verbosity to prevent log file issues
 logging.basicConfig(
-    level=logging.DEBUG,
+    level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
-logger = logging.getLogger(__name__)
+logger = logging.getLogger('wsgi')
+logger.setLevel(logging.WARNING)
 
+# Minimal debug output
 logger.debug(f"Python path in wsgi.py: {sys.path}")
-logger.debug("Module name: %s", __name__)
-logger.debug("Starting Flask application initialization in WSGI")
 
 try:
-    application = create_app()
-    app = application  # For Gunicorn compatibility
-    logger.debug("Flask application initialized successfully in WSGI")
-    logger.debug("App variable type: %s", type(app))
-    logger.debug("App variable attributes: %s", dir(app))
+    # Import and create the Flask app
+    from app import create_app
+    app = create_app()
+    
+    # Apply performance and stability fixes
+    try:
+        from app.config_fix import apply_fixes
+        app = apply_fixes(app)
+        logger.warning("Applied performance and stability fixes")
+    except Exception as e:
+        logger.error(f"Failed to apply fixes: {str(e)}")
 except Exception as e:
     logger.error("Failed to initialize Flask application in WSGI: %s", str(e), exc_info=True)
     raise
 
+# This is used by Gunicorn
 if __name__ == '__main__':
     app.run() 
